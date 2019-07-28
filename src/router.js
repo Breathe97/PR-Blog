@@ -1,0 +1,97 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Web from '@/layout/web'
+import Admin from '@/layout/admin'
+Vue.use(Router)
+
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/admin',
+      redirect: '/admin/index'
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () =>
+        import(/* webpackChunkName: "about" */ './views/404/404.vue')
+    },
+    {
+      path: '/home',
+      component: Web,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/web/Home'),
+          name: 'home'
+        }
+      ]
+    },
+    {
+      path: '/study',
+      component: Web,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/web/Study'),
+          name: 'study'
+        }
+      ]
+    },
+    {
+      path: '/note',
+      component: Web,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/web/Note'),
+          name: 'note'
+        }
+      ]
+    },
+    {
+      path: '/zone',
+      component: Web,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/web/Zone'),
+          name: 'zone'
+        }
+      ]
+    },
+    {
+      path: '/about',
+      component: Web,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/web/About'),
+          name: 'about'
+        }
+      ]
+    },
+    // 管理端路由
+    {
+      path: '/admin',
+      component: Admin,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/admin/Index'),
+          name: 'index'
+        }
+      ]
+    },
+    {
+      path: '*',
+      redirect: '/404'
+    }
+  ]
+})
