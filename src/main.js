@@ -4,8 +4,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/display.css'
 import axios from '@/utils/axios'
-import '@/theme/index.css' // 主题
-import './styles/index.scss' // 自定义样式
+import '@/theme/index.css'
+import './styles/index.scss'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import VueParticles from 'vue-particles'
@@ -19,7 +19,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 Vue.prototype.$axios = axios
-Vue.prototype.ToDetails = ToDetails // 跳转到文章详情页面
+Vue.prototype.ToDetails = ToDetails
 router.afterEach(() => {})
 new Vue({
   router,

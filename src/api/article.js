@@ -1,6 +1,6 @@
 import request from '@/utils/axios'
 
-// ²éÑ¯ÎÄÕÂ
+// æ–‡ç« æŸ¥è¯¢
 export function ApiArticleQuery(data) {
   return request({
     method: 'post',

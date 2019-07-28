@@ -1,5 +1,4 @@
 module.exports = {
-  // ĞŞ¸ÄµÄÅäÖÃ
   publicPath: '/',
   devServer: {
     proxy: {
