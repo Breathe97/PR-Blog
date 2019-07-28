@@ -4,8 +4,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/display.css'
 import axios from '@/utils/axios'
-import '@/theme/index.css' // ä¸»é¢˜
-import './styles/index.scss' // è‡ªå®šä¹‰æ ·å¼
+import '@/theme/index.css' // Ö÷Ìâ
+import './styles/index.scss' // ×Ô¶¨ÒåÑùÊ½
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import VueParticles from 'vue-particles'
@@ -19,7 +19,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 Vue.prototype.$axios = axios
-Vue.prototype.ToDetails = ToDetails // è·³è½¬åˆ°æ–‡ç« è¯¦æƒ…é¡µé¢
+Vue.prototype.ToDetails = ToDetails // Ìø×ªµ½ÎÄÕÂÏêÇéÒ³Ãæ
 router.afterEach(() => {})
 new Vue({
   router,

@@ -1,4 +1,5 @@
 .DS_Store
+<<<<<<< HEAD
 node_modules
 /dist
 
@@ -10,6 +11,18 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+=======
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+**/*.log
+
+tests/**/coverage/
+tests/e2e/reports
+selenium-debug.log
+>>>>>>> db0a43113ba5667f88ea74c1287d11e99c71a636
 
 # Editor directories and files
 .idea
@@ -18,4 +31,11 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+<<<<<<< HEAD
 *.sw?
+=======
+*.local
+
+package-lock.json
+yarn.lock
+>>>>>>> db0a43113ba5667f88ea74c1287d11e99c71a636
