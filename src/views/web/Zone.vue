@@ -16,7 +16,7 @@
           </el-row>
           <el-row class="content">
             <el-col class="img">
-              <img :src="item.img_url" alt />
+              <img :src="item.icon" alt />
             </el-col>
             <el-col class="text">
               <p>{{item.describe}}</p>
@@ -41,7 +41,7 @@
           </el-row>
           <el-row class="content">
             <el-col class="img">
-              <img :src="item.img_url" alt />
+              <img :src="item.icon" alt />
             </el-col>
             <el-col class="text">
               <p>{{item.describe}}</p>
