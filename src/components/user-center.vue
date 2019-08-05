@@ -1,13 +1,23 @@
 <template>
-  <div id="user-center">
-    <div v-if="token">
-      <h4>704340916@qq.com，您好！</h4>
+  <div id="user-center" v-loading="loading">
+    <div v-if="info">
+      <h4>
+        {{info.nickname||info.username||info.email||info.phone}}，您好！
+        <Icon type="ios-exit-outline" class="logout" @click.native="Logout()" />
+        <Icon
+          v-if="!info.power"
+          type="ios-cog-outline"
+          class="logout"
+          @click.native="$router.push('/admin')"
+        />
+      </h4>
     </div>
     <div v-else>
       <div class="title">
         <h4>
           您还未登录，请先
-          <span style="color:cornflowerblue;cursor: pointer;" @click="ClickModel(0)">登录</span>！
+          <span style="color:cornflowerblue;cursor: pointer;" @click="ClickModel(0)">登录</span>
+          ！
         </h4>
       </div>
       <div>
@@ -19,7 +29,12 @@
           <el-form-item>
             <el-input v-model="inf_login.password" placeholder="请输入您的密码"></el-input>
           </el-form-item>
-          <el-button type="primary" @click="DoLogin(1)">登录</el-button>
+          <el-button
+            type="primary"
+            @click="DoLogin(1)"
+            :icon="loging?'el-icon-loading':''"
+            :disabled="loging"
+          >登录</el-button>
           <el-row type="flex" justify="end" class="end">
             <el-col :span="6">
               <span>忘记密码?</span>
@@ -85,7 +100,7 @@
   </div>
 </template>
 <script>
-import { ApiLogin, ApiRegister, } from '@/api/user'
+import { ApiLogin, ApiRegister, ApiLogout, ApiInfo } from '@/api/user'
 import { ApiVerificationCode } from '@/api/common'
 export default {
   data () {
@@ -94,6 +109,9 @@ export default {
       token: null,
       time: 0,
       theme1: 'light',
+      loging: false,
+      loading: true,
+      info: null,
       inputFocus: false,
       regModel: 0, // 注册模式 0- 登录 1 -普通注册 2-手机注册 3 -邮箱注册
       inf_login: {
@@ -112,15 +130,39 @@ export default {
       }
     }
   },
-  mounted () {
-    this.token = localStorage.getItem('token');
+  created () {
+    this.GetInfo()
   },
   methods: {
+    // 获取用户信息
+    GetInfo () {
+      ApiInfo().then(res => {
+        if (res.code === -1) {
+          this.info = null
+        } else {
+          this.info = res.content
+        }
+        this.loading = false
+      })
+    },
     // 确定登录
     DoLogin () {
+      this.loging = true
       ApiLogin(this.inf_login).then(res => {
+        this.loging = false
         localStorage.setItem('token', res.content.token)
+        this.token = res.content.token
         this.$message.success('登录成功')
+        this.GetInfo()
+      })
+    },
+    // 注销
+    Logout () {
+      ApiLogout().then(() => {
+        this.token = null
+        localStorage.removeItem('token')
+        this.info = null
+        this.$message.success('已注销')
       })
     },
     //注册 按钮
@@ -129,6 +171,7 @@ export default {
       ApiRegister(this.inf_reg).then(res => {
         this.$message.success('注册成功')
         localStorage.setItem('token', res.content.token)
+        this.GetInfo()
       })
     },
     // 切换注册模式

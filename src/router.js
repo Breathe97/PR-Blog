@@ -85,6 +85,41 @@ export default new Router({
           path: 'index',
           component: () => import('@/views/admin/Index'),
           name: 'index'
+        },
+        {
+          path: 'book',
+          component: () => import('@/views/admin/Book'),
+          name: 'book'
+        },
+        {
+          path: 'url',
+          component: () => import('@/views/admin/Url'),
+          name: 'url'
+        },
+        {
+          path: 'article',
+          component: () => import('@/views/admin/Article'),
+          name: 'article'
+        },
+        {
+          path: 'comment',
+          component: () => import('@/views/admin/Comment'),
+          name: 'comment'
+        },
+        {
+          path: 'message',
+          component: () => import('@/views/admin/Message'),
+          name: 'message'
+        },
+        {
+          path: 'user',
+          component: () => import('@/views/admin/User'),
+          name: 'user'
+        },
+        {
+          path: 'set',
+          component: () => import('@/views/admin/Set'),
+          name: 'set'
         }
       ]
     },

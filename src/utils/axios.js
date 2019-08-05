@@ -28,7 +28,8 @@ service.interceptors.response.use(
   response => {
     // 对响应数据做点什么
     let res = response.data
-    if (res.code !== 200) {
+    if (res.code === 0) {
+      // 错误
       Message({
         message: res.message || 'Error',
         type: 'error',

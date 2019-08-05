@@ -16,3 +16,17 @@ export function ApiLogin(data) {
     data: data
   })
 }
+// 用户登出
+export function ApiLogout() {
+  return request({
+    method: 'post',
+    url: '/user/logout'
+  })
+}
+// 用户信息
+export function ApiInfo() {
+  return request({
+    method: 'post',
+    url: '/user/info'
+  })
+}

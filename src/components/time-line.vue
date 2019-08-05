@@ -7,7 +7,7 @@
         :timestamp="item.R_time | TimeFormat"
         placement="top"
       >
-        <h4 @click="ToDetails(item._id)">{{item.type}}《{{item.title}}》</h4>
+        <h4 @click="ToDetails(item._id)">{{item.act}}{{item.type}}《{{item.title}}》</h4>
         <p>{{item.describe}}</p>
       </el-timeline-item>
       <el-timeline-item
