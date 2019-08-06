@@ -1,5 +1,5 @@
 <template>
-  <div id="study">
+  <div id="study" v-loading="loading">
     <div class="books">
       <div class="list">
         <el-divider content-position="left">
@@ -109,6 +109,7 @@ import { ApiArticleQuery } from '@/api/article'
 export default {
   data () {
     return {
+      loading: true,
       inf_articleQuery: {
         "model": 0,
         "type": "新手入门",
@@ -156,25 +157,37 @@ export default {
       this.GetArticleQuery2()
       this.GetArticleQuery3()
       this.GetArticleQuery4()
+      // axios.all([
+      //   ApiArticleQuery(this.inf_articleQuery),
+      //   ApiArticleQuery(this.inf_articleQuery2),
+      //   ApiArticleQuery(this.inf_articleQuery3),
+      //   ApiArticleQuery(this.inf_articleQuery4)
+      // ]).then(axios.spread((acct, perms) => {
+      //   console.log(acct);
+      // }))
     },
     GetArticleQuery () {
-      ApiArticleQuery(this.inf_articleQuery).then(res => {
+      return ApiArticleQuery(this.inf_articleQuery).then(res => {
         this.res_articleQuery = res.content
+        this.loading = false
       })
     },
     GetArticleQuery2 () {
-      ApiArticleQuery(this.inf_articleQuery2).then(res => {
+      return ApiArticleQuery(this.inf_articleQuery2).then(res => {
         this.res_articleQuery2 = res.content
+        this.loading = false
       })
     },
     GetArticleQuery3 () {
-      ApiArticleQuery(this.inf_articleQuery3).then(res => {
+      return ApiArticleQuery(this.inf_articleQuery3).then(res => {
         this.res_articleQuery3 = res.content
+        this.loading = false
       })
     },
     GetArticleQuery4 () {
-      ApiArticleQuery(this.inf_articleQuery4).then(res => {
+      return ApiArticleQuery(this.inf_articleQuery4).then(res => {
         this.res_articleQuery4 = res.content
+        this.loading = false
       })
     },
   }

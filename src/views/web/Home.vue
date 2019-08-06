@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" v-loading="loading">
     <div
       class="list"
       v-for="(item,index) in res_rticleQuery"
@@ -43,6 +43,7 @@ export default {
     return {
       count: 20,
       value2: false,
+      loading: true,
       scrollTop: 0,
       scrollHeight: 0,
       getList: false,
@@ -68,6 +69,7 @@ export default {
     GetArticleQuery () {
       ApiArticleQuery(this.inf_rticleQuery).then(res => {
         this.res_rticleQuery = res.content.list
+        this.loading = false
       })
     },
   }

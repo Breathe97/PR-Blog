@@ -1,5 +1,5 @@
 <template>
-  <div id="note">
+  <div id="note" v-loading="loading">
     <el-row class="top">
       <span :class="inf_articleQuery.model===0?'active':''" @click="ClickModel(0)">默认</span>
       <el-divider direction="vertical"></el-divider>
@@ -44,9 +44,9 @@
         </el-row>
       </el-row>
     </el-row>
-    <el-row class="more">
+    <el-row class="more" v-if="res_articleQuery">
       <span @click="More">
-        <i v-if="loading" class="el-icon-loading"></i>
+        <i v-if="loading2" class="el-icon-loading"></i>
         {{more}}
       </span>
     </el-row>
@@ -59,6 +59,7 @@ export default {
     return {
       more: '加载更多',
       loading: false,
+      loading2: false,
       inf_articleQuery: {
         "model": 0,
         "tag": "",
@@ -78,6 +79,7 @@ export default {
     },
     // 查询文章
     GetArticleQuery () {
+      this.loading = true
       ApiArticleQuery(this.inf_articleQuery).then(res => {
         this.res_articleQuery = res.content
         this.loading = false
@@ -96,7 +98,7 @@ export default {
         return
       }
       this.inf_articleQuery.sizes += 5
-      this.loading = true
+      this.loading2 = true
       this.GetArticleQuery()
     }
   },

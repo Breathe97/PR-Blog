@@ -1,5 +1,5 @@
 <template>
-  <div id="zone">
+  <div id="zone" v-loading="loading">
     <el-row class="menu">
       <h3>我的工具</h3>
       <el-row>
@@ -57,6 +57,7 @@ import { ApiArticleQuery } from '@/api/article'
 export default {
   data () {
     return {
+      loading: true,
       inf_articleQuery: {
         "model": 0,
         "type": "工具",
@@ -86,8 +87,10 @@ export default {
       this.GetArticleQuery2()
     },
     GetArticleQuery () {
+      this.loading = true
       ApiArticleQuery(this.inf_articleQuery).then(res => {
         this.res_articleQuery = res.content
+        this.loading = false
       })
     },
     GetArticleQuery2 () {
