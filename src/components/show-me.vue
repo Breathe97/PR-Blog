@@ -77,8 +77,8 @@
       <h4 class="title">
         <i class="el-icon-arrow-down"></i>外链收藏
       </h4>
-      <p v-for="(item, index) in 4" :key="index">
-        <span @click="Open(item.url)">{{'item.title'}}</span>
+      <p v-for="(item, index) in res_urlQuery.list" :key="index">
+        <span @click="Open(item.url)">{{item.title}}</span>
       </p>
     </el-row>
   </div>
@@ -86,6 +86,7 @@
 <script>
 import { ApiOverview } from '@/api/common'
 import { ApiBookQuery } from '@/api/book'
+import { ApiUrlQuery } from '@/api/url'
 
 export default {
   props: ['scrollTop', 'scrollHeight', 'scrollWidth'],
@@ -98,8 +99,14 @@ export default {
         "pages": 1,
         "sizes": 5
       },
+      inf_urlQuery: {
+        "title": "",
+        "pages": 1,
+        "sizes": 10
+      },
       res_overview: [],
       booksList: [],
+      res_urlQuery: {},
     }
   },
   mounted () {
@@ -110,6 +117,7 @@ export default {
     Init () {
       this.GetOverview()
       this.GetBookQuery()
+      this.GetUrlQuery()
     },
     // 总览数量查询
     GetOverview () {
@@ -121,6 +129,13 @@ export default {
     GetBookQuery () {
       ApiBookQuery(this.inf_BookQuery).then(res => {
         this.booksList = res.content.list
+      })
+    },
+    // 外链查询
+    GetUrlQuery () {
+      ApiUrlQuery(this.inf_urlQuery).then(res => {
+        this.res_urlQuery = res.content
+        // console.log(res);
       })
     },
     // 跳转路由

@@ -7,7 +7,12 @@
       <el-divider direction="vertical"></el-divider>
       <span :class="inf_articleQuery.model===3?'active':''" @click="ClickModel(3)">最热</span>
     </el-row>
-    <el-row class="list" v-for="(item, index) in res_articleQuery.list" :key="index">
+    <el-row
+      class="list"
+      v-for="(item, index) in res_articleQuery.list"
+      :key="index"
+      @click.native="ToDetails(item._id)"
+    >
       <el-row class="top">
         <h2>{{item.title}}</h2>
         <el-row class="other">

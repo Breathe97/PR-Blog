@@ -76,6 +76,17 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/details',
+      component: Web,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/web/Details'),
+          name: 'details'
+        }
+      ]
+    },
     // 管理端路由
     {
       path: '/admin',

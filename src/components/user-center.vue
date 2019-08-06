@@ -24,10 +24,18 @@
         <!-- 登录 -->
         <el-form ref="form" v-if="regModel===0">
           <el-form-item>
-            <el-input v-model="inf_login.UPE" placeholder="请输入您的账号"></el-input>
+            <el-input placeholder="请输入您的账号" v-model="inf_login.UPE">
+              <template slot="prepend">
+                <Icon type="ios-person" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input v-model="inf_login.password" placeholder="请输入您的密码"></el-input>
+            <el-input placeholder="请输入您的密码" v-model="inf_login.password">
+              <template slot="prepend">
+                <Icon type="ios-keypad" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-button
             type="primary"
@@ -47,13 +55,25 @@
         <!-- 用户名注册 -->
         <el-form ref="form" v-else-if="regModel===1">
           <el-form-item>
-            <el-input v-model="inf_reg.username" placeholder="请输入您的用户名"></el-input>
+            <el-input placeholder="请输入您的用户名" v-model="inf_reg.username">
+              <template slot="prepend">
+                <Icon type="ios-person" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input v-model="inf_reg.password" placeholder="请输入您的密码"></el-input>
+            <el-input placeholder="请输入您的密码" v-model="inf_reg.password">
+              <template slot="prepend">
+                <Icon type="ios-keypad" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input v-model="inf_reg._password" placeholder="请重复输入密码"></el-input>
+            <el-input placeholder="请重复输入密码" v-model="inf_reg._password">
+              <template slot="prepend">
+                <Icon type="ios-keypad" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-button type="primary" @click="DoRegister(1)">注册</el-button>
           <el-row type="flex" justify="end" class="end">
@@ -68,22 +88,31 @@
         <!-- 邮箱注册 -->
         <el-form ref="form" v-else-if="regModel===3">
           <el-form-item>
-            <el-input v-model="inf_reg.email" placeholder="请输入您的邮箱"></el-input>
+            <el-input placeholder="请输入您的邮箱" v-model="inf_reg.email">
+              <template slot="prepend">
+                <Icon type="ios-mail" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
-            <el-col :span="14">
-              <el-input v-model.number="inf_reg.VC_code" placeholder="请输入邮箱验证码"></el-input>
-            </el-col>
-            <el-col :span="9" :offset="1" style="text-align:center;">
-              <el-button
-                type="primary"
-                :disabled="time>1"
-                @click="GetVS_code"
-              >{{time===0?'获取':'重新发送'+(time===1?'':'('+time+')')}}</el-button>
-            </el-col>
+            <el-input placeholder="请输入邮箱验证码" v-model="inf_reg.VC_code">
+              <template slot="prepend">
+                <Icon type="md-key" />
+              </template>
+              <template slot="append">
+                <span
+                  :class="time>1?'disabled':'get_code'"
+                  @click="time>1?'':GetVS_code()"
+                >{{time===0?'获取':'重新发送'+(time===1?'':'('+time+')')}}</span>
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input v-model="inf_reg.password" placeholder="请输入密码"></el-input>
+            <el-input placeholder="请输入您的密码" v-model="inf_reg.password">
+              <template slot="prepend">
+                <Icon type="ios-keypad" />
+              </template>
+            </el-input>
           </el-form-item>
           <el-button type="primary" @click="DoRegister(3)">注册</el-button>
           <el-row type="flex" justify="end" class="end">
@@ -194,7 +223,7 @@ export default {
     // 获取验证码
     GetVS_code () {
       ApiVerificationCode(this.inf_reg.email).then(() => {
-        this.time = 10
+        this.time = 60
         let a = setInterval(() => {
           this.time--
           if (this.time === 1) {

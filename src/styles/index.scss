@@ -317,6 +317,15 @@ $defcolor: #6495ed;
   .el-button {
     width: 100%;
   }
+  .get_code {
+    cursor: pointer;
+    &:hover {
+      color: $defcolor;
+    }
+  }
+  .disabled {
+    cursor: not-allowed;
+  }
   .end {
     text-align: center;
     height: 30px;
@@ -586,6 +595,7 @@ $defcolor: #6495ed;
     }
   }
   .list {
+    cursor: pointer;
     width: auto;
     background: white;
     margin: 20px 0;
@@ -745,6 +755,7 @@ $defcolor: #6495ed;
       text-align: right;
       .el-pagination {
         height: 40px;
+
         padding: 6px 0;
       }
     }
@@ -906,12 +917,14 @@ $defcolor: #6495ed;
     }
   }
 }
-#detalis {
+#details {
   padding: 20px;
+  background: white;
   .ql-snow {
     border: none;
   }
   .title {
+    overflow: hidden;
     height: 50px;
     line-height: 50px;
     text-align: center;
@@ -925,7 +938,7 @@ $defcolor: #6495ed;
   }
   .describe {
     color: #ccc;
-    line-height: 30px;
+    line-height: 20px;
     padding: 10px;
   }
 }

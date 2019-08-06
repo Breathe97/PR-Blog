@@ -16,6 +16,14 @@ export function ApiArticleDel(data) {
     data: data
   })
 }
+// 文章详情查询
+export function ApiArticleDetails(id) {
+  return request({
+    method: 'get',
+    url: '/article/details',
+    params: { article_id: id }
+  })
+}
 // 文章查询
 export function ApiArticleQuery(data) {
   return request({

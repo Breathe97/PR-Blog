@@ -1,6 +1,11 @@
 <template>
   <div id="home">
-    <div class="list" v-for="(item,index) in res_rticleQuery" :key="index">
+    <div
+      class="list"
+      v-for="(item,index) in res_rticleQuery"
+      :key="index"
+      @click="ToDetails(item._id)"
+    >
       <el-row class="title">
         <h2>{{item.title}}</h2>
       </el-row>
