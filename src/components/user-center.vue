@@ -1,5 +1,5 @@
 <template>
-  <div id="user-center" v-loading="loading">
+  <div id="user-center">
     <div v-if="info">
       <h4>
         {{info.nickname||info.username||info.email||info.phone}}，您好！
@@ -139,7 +139,6 @@ export default {
       time: 0,
       theme1: 'light',
       loging: false,
-      loading: true,
       info: null,
       inputFocus: false,
       regModel: 0, // 注册模式 0- 登录 1 -普通注册 2-手机注册 3 -邮箱注册
@@ -160,18 +159,18 @@ export default {
     }
   },
   created () {
-    this.GetInfo()
+    let info = localStorage.getItem('info')
+    this.info = info ? JSON.parse(info) : null
   },
   methods: {
     // 获取用户信息
     GetInfo () {
       ApiInfo().then(res => {
-        if (res.code === -1) {
-          this.info = null
-        } else {
+        if (res.code === 200) {
           this.info = res.content
+          return localStorage.setItem('info', JSON.stringify(res.content))
         }
-        this.loading = false
+        return localStorage.removeItem('info')
       })
     },
     // 确定登录
@@ -190,6 +189,7 @@ export default {
       ApiLogout().then(() => {
         this.token = null
         localStorage.removeItem('token')
+        localStorage.removeItem('info')
         this.info = null
         this.$message.success('已注销')
       })

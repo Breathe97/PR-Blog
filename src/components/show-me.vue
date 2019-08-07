@@ -3,7 +3,7 @@
     <!-- <div class="ivu-drawer-mask" :style="wxActive?'':'display:none;'" @click="wxActive=false"></div> -->
     <el-row class="me">
       <el-row>
-        <img class="wximg" src="@/assets/me.png" />
+        <img class="wximg" src="@/assets/me.png" @click="dialogVisible=true" />
       </el-row>
       <el-row class="autograph">
         <span>梦想总要有的</span>
@@ -81,6 +81,9 @@
         <span @click="Open(item.url)">{{item.title}}</span>
       </p>
     </el-row>
+    <el-dialog :visible.sync="dialogVisible" width="20%">
+      <img class="wximg" src="@/assets/me.png" width="100%" />
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -93,6 +96,7 @@ export default {
   data () {
     return {
       offset: 0,
+      dialogVisible: false,
       inf_BookQuery: {
         "type": 1,
         "title": "",

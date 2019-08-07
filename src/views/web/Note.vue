@@ -39,14 +39,16 @@
             <el-image :src="item.img_url" />
           </el-col>
           <el-col class="text" :span="16">
-            <p>{{item.content}}</p>
+            <div class="ql-container ql-snow">
+              <div class="ql-editor" v-html="item.content"></div>
+            </div>
           </el-col>
         </el-row>
       </el-row>
     </el-row>
     <el-row class="more" v-if="res_articleQuery">
       <span @click="More">
-        <i v-if="loading2" class="el-icon-loading"></i>
+        <i v-if="loading" class="el-icon-loading"></i>
         {{more}}
       </span>
     </el-row>

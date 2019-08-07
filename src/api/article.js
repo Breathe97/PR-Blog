@@ -17,10 +17,26 @@ export function ApiArticleDel(data) {
   })
 }
 // 文章详情查询
+export function ApiArticleSearch(title) {
+  return request({
+    method: 'get',
+    url: '/article/search',
+    params: { title: title }
+  })
+}
+// 文章详情查询
 export function ApiArticleDetails(id) {
   return request({
     method: 'get',
     url: '/article/details',
+    params: { article_id: id }
+  })
+}
+// 文章查看次数增加
+export function ApiArticleLook(id) {
+  return request({
+    method: 'get',
+    url: '/article/look',
     params: { article_id: id }
   })
 }
