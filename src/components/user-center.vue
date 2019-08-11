@@ -1,14 +1,14 @@
 <template>
   <div id="user-center">
-    <div v-if="info">
+    <div v-if="$store.state.info">
       <h4>
-        {{info.nickname||info.username||info.email||info.phone}}，您好！
+        {{$store.state.info.nickname||$store.state.info.username||$store.state.info.email||$store.state.info.phone}}，您好！
         <Icon type="ios-exit-outline" class="logout" @click.native="Logout()" />
         <Icon
-          v-if="!info.power"
+          v-if="!$store.state.info.power"
           type="ios-cog-outline"
           class="logout"
-          @click.native="$router.push('/admin')"
+          @click.native="Toadmin"
         />
       </h4>
     </div>
@@ -31,7 +31,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="请输入您的密码" v-model="inf_login.password">
+            <el-input placeholder="请输入您的密码" v-model="inf_login.password" show-password>
               <template slot="prepend">
                 <Icon type="ios-keypad" />
               </template>
@@ -62,14 +62,14 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="请输入您的密码" v-model="inf_reg.password">
+            <el-input placeholder="请输入您的密码" v-model="inf_reg.password" show-password>
               <template slot="prepend">
                 <Icon type="ios-keypad" />
               </template>
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="请重复输入密码" v-model="inf_reg._password">
+            <el-input placeholder="请重复输入密码" v-model="inf_reg._password" show-password>
               <template slot="prepend">
                 <Icon type="ios-keypad" />
               </template>
@@ -108,7 +108,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="请输入您的密码" v-model="inf_reg.password">
+            <el-input placeholder="请输入您的密码" v-model="inf_reg.password" show-password>
               <template slot="prepend">
                 <Icon type="ios-keypad" />
               </template>
@@ -135,11 +135,9 @@ export default {
   data () {
     return {
       value: '',
-      token: null,
       time: 0,
       theme1: 'light',
       loging: false,
-      info: null,
       inputFocus: false,
       regModel: 0, // 注册模式 0- 登录 1 -普通注册 2-手机注册 3 -邮箱注册
       inf_login: {
@@ -159,18 +157,15 @@ export default {
     }
   },
   created () {
-    let info = localStorage.getItem('info')
-    this.info = info ? JSON.parse(info) : null
   },
   methods: {
     // 获取用户信息
     GetInfo () {
       ApiInfo().then(res => {
         if (res.code === 200) {
-          this.info = res.content
-          return localStorage.setItem('info', JSON.stringify(res.content))
+          return this.$store.commit('SET_INFO', res.content)
         }
-        return localStorage.removeItem('info')
+        return this.$store.commit('SET_INFO', null)
       })
     },
     // 确定登录
@@ -178,19 +173,20 @@ export default {
       this.loging = true
       ApiLogin(this.inf_login).then(res => {
         this.loging = false
-        localStorage.setItem('token', res.content.token)
-        this.token = res.content.token
-        this.$message.success('登录成功')
+        if (res.code === 200) {
+          localStorage.setItem('token', res.content.token)
+          this.$message.success('登录成功')
+        } else {
+          this.$message.error(res.message)
+        }
         this.GetInfo()
       })
     },
     // 注销
     Logout () {
       ApiLogout().then(() => {
-        this.token = null
         localStorage.removeItem('token')
-        localStorage.removeItem('info')
-        this.info = null
+        this.$store.commit('SET_INFO', null)
         this.$message.success('已注销')
       })
     },
@@ -198,9 +194,13 @@ export default {
     DoRegister (val) {
       this.inf_reg.model = val // 切换注册模式
       ApiRegister(this.inf_reg).then(res => {
-        this.$message.success('注册成功')
-        localStorage.setItem('token', res.content.token)
-        this.GetInfo()
+        if (res.code === 200) {
+          this.$message.success('注册成功')
+          localStorage.setItem('token', res.content.token)
+          this.GetInfo()
+        } else {
+          this.$message.error(res.message)
+        }
       })
     },
     // 切换注册模式
@@ -231,7 +231,26 @@ export default {
           }
         }, 1000)
       })
+    },
+    // 后台管理
+    Toadmin () {
+      // 获取用户信息
+      return ApiInfo()
+        .then(res => {
+          if (res.content.power !== 0) {
+            // 权限不足
+            this.$message.error('权限不足')
+          }
+          // 权限足够
+          return this.$router.push('/admin')
+        })
+        .catch(() => {
+          // 权限异常
+          this.$message.error('权限异常')
+          localStorage.removeItem('token')
+          localStorage.removeItem('info')
+        })
     }
-  },
+  }
 }
 </script>

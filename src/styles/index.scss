@@ -291,15 +291,24 @@ $defcolor: #6495ed;
   }
   .float-menu {
     .ivu-back-top {
-      bottom: 71px !important;
+      bottom: 112px !important;
       z-index: 999;
+      .ivu-back-top-inner {
+        height: 40px;
+        width: 48px;
+        .ivu-icon {
+          padding: 10px 14px;
+          font-size: 20px;
+        }
+      }
     }
-    .music {
+    .message {
       position: fixed;
-      bottom: 30px;
+      bottom: 71px;
       right: 30px;
       height: 40px;
       width: 48px;
+      padding: 10px 14px;
       z-index: 999;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
@@ -310,9 +319,34 @@ $defcolor: #6495ed;
         background: rgba(0, 0, 0, 0.7);
       }
       .icon {
-        margin: 8px 12px;
-        height: 24px;
-        width: 24px;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        background-image: url('../assets/message_def.png');
+        background-size: 75%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+    .music {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      height: 40px;
+      width: 48px;
+      padding: 10px 14px;
+      z-index: 999;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
+      background: rgba(0, 0, 0, 0.6);
+      &:hover {
+        background: rgba(0, 0, 0, 0.7);
+      }
+      .icon {
+        height: 20px;
+        width: 20px;
         display: inline-block;
         background-image: url('../assets/music_def.png');
         background-size: 75%;
@@ -765,8 +799,14 @@ $defcolor: #6495ed;
   }
   .arts {
     padding: 0 20px;
+    h5 {
+      line-height: 25px;
+    }
     ul {
       padding: 0 20px;
+      li {
+        line-height: 25px;
+      }
     }
   }
 }
@@ -992,6 +1032,7 @@ $defcolor: #6495ed;
   padding: 20px;
   background: white;
   border: 1px solid #eaeaea;
+  overflow: hidden;
   .ql-snow {
     border: none;
   }
@@ -1002,7 +1043,6 @@ $defcolor: #6495ed;
     text-align: center;
   }
   .other {
-    height: 30px;
     line-height: 30px;
     span {
       margin: 0 10px;
@@ -1012,5 +1052,17 @@ $defcolor: #6495ed;
     color: #999;
     line-height: 20px;
     padding: 10px;
+  }
+  .share {
+    transition: all 0.3s;
+    margin-left: 20px;
+  }
+  .social-share {
+    text-align: right;
+    // transform: scale(0.8);
+    line-height: 40px;
+    .social-share-icon {
+      transform: scale(0.8);
+    }
   }
 }

@@ -81,7 +81,7 @@
         <span @click="Open(item.url)">{{item.title}}</span>
       </p>
     </el-row>
-    <el-dialog :visible.sync="dialogVisible" width="20%">
+    <el-dialog :visible.sync="dialogVisible" width="400px">
       <img class="wximg" src="@/assets/me.png" width="100%" />
     </el-dialog>
   </div>

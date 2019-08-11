@@ -4,17 +4,13 @@
       <el-timeline-item
         v-for="(item, index) in resTimeLine"
         :key="index"
-        :timestamp="item.R_time | TimeFormat"
+        :timestamp="item.E_time | TimeFormat"
         placement="top"
       >
         <h4 @click="ToDetails(item._id)">{{item.act}}{{item.type}}《{{item.title}}》</h4>
         <p>{{item.describe}}</p>
       </el-timeline-item>
-      <el-timeline-item
-        class="more"
-        :timestamp="resTimeLine.length!==0? '查看更多':'暂无更多'"
-        placement="top"
-      ></el-timeline-item>
+      <el-timeline-item class="more" :timestamp="false? '查看更多':'暂无更多'" placement="top"></el-timeline-item>
     </el-timeline>
   </div>
 </template>

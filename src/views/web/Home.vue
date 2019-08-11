@@ -30,7 +30,7 @@
         <el-image :src="item.img_url"></el-image>
       </el-row>
       <el-row class="text">
-        <p>{{item.content}}</p>
+        <p>{{item.describe}}</p>
       </el-row>
     </div>
   </div>

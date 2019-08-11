@@ -35,7 +35,9 @@
       <h4>技术栈</h4>
     </el-row>
     <el-row class="arts">
-      <h5>前端</h5>
+      <h5>
+        <i class="el-icon-star-on">前端</i>
+      </h5>
       <ul>
         <li>
           <a href="https://cli.vuejs.org/zh/" target="_blank">vue-cli</a>：一个基于 Vue.js 进行快速开发的完整系统。
@@ -66,7 +68,9 @@
         </li>
       </ul>
       <br />
-      <h5>后端</h5>
+      <h5>
+        <i class="el-icon-star-on">后端</i>
+      </h5>
       <ul>
         <li>
           <a href="http://nodejs.cn/" target="_blank">nodejs</a>：一个基于 Chrome V8 引擎的 JavaScript 运行环境。
@@ -99,7 +103,7 @@
     </el-row>
     <el-row class="title">
       <p>
-        PS:初次设计博客，UI是个让我很困扰的问题，所以本博客UI参照了
+        PS：初次设计博客，UI是个让我很困扰的问题，所以本博客UI参照了
         <a href="http://liuwangshu.cn/" target="_blank">刘望舒的博客</a>
       </p>
     </el-row>
