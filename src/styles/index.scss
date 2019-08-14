@@ -1065,4 +1065,51 @@ $defcolor: #6495ed;
       transform: scale(0.8);
     }
   }
+  .comment-list {
+    height: auto;
+    .user {
+      position: relative;
+      margin: 10px 0;
+      height: 70px;
+      padding: 0 0 0 50px;
+      .img {
+        position: absolute;
+        top: -10px;
+        left: 0px;
+        height: 40px;
+        width: 40px;
+        background: #eaeaea;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .name {
+        height: 30px;
+        border-top: 1px solid #eaeaea;
+        line-height: 30px;
+        overflow: hidden;
+        h4 {
+          display: inline-block;
+        }
+        .time {
+          float: right;
+          line-height: 30px;
+          font-size: 10px;
+          color: #999;
+        }
+      }
+      .text {
+        line-height: 20px;
+        height: 40px;
+        overflow: hidden;
+      }
+      .other {
+        height: 20px;
+        line-height: 20px;
+      }
+    }
+  }
 }

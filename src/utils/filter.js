@@ -5,6 +5,7 @@ import Moment from 'moment'
 Vue.filter('TimeFormat', date => {
   // 返回处理后的值
   return Moment(Number(date)).format('YYYY-MM-DD')
+  // return Moment(Number(date)).format('YYYY-MM-DD，HH:MM:SS')
 })
 Vue.filter('TagFormat', date => {
   // 返回处理后的值
