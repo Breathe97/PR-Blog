@@ -222,6 +222,11 @@ export default {
     },
     // 获取验证码
     GetVS_code () {
+      let reg = /^([a-zA-Z]|[0-9])(w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/ // 邮箱验证规则
+      //验证邮箱是否正确
+      if (!reg.test(this.inf_reg.email)) {
+        return this.$message.info('请输入正确的邮箱')
+      }
       ApiVerificationCode(this.inf_reg.email).then(() => {
         this.time = 60
         let a = setInterval(() => {
