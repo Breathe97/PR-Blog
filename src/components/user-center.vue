@@ -157,6 +157,7 @@ export default {
     }
   },
   created () {
+    // console.log(this.$store.state.info);
   },
   methods: {
     // 获取用户信息
@@ -247,6 +248,7 @@ export default {
             this.$message.error('权限不足')
           }
           // 权限足够
+          this.$store.commit('USER_CENTER_TRUE', false)
           return this.$router.push('/admin')
         })
         .catch(() => {
